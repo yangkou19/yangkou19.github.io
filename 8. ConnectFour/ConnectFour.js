@@ -20,7 +20,7 @@ $('td').click(function(){
 
 vcheck();
 hcheck();
-dcheck()
+dcheck();
 })
 
 // Vertical Check
@@ -70,10 +70,28 @@ function hcheck(){
 // Diagnol Check
 function dcheck(){
   for (r=1; r<6; r++){
-    var count = 0;
-    for (c=r; c<7; c++){
-      var prevColor = $("td:eq("+(c-1+(r-1)*7)+")").attr('id');
-      var color = $("td:eq("+(c+r*7)+")").attr('id');
+    var count = 0 ;
+    for (c=1; c<7-r; c++){
+      var prevColor = $("td:eq("+(c-1+(r+c-1)*7)+")").attr('id');
+      var color = $("td:eq("+(c+(r+c)*7)+")").attr('id');
+      if ((color === "red"||color == "blue") && color === prevColor) {
+        count ++;
+        console.log(count);
+        if (count === 3){
+          $('h3').text(map[color]+" has won! Refresh your browser to play again!")
+          break;
+        }
+      }
+      else {
+        count = 0;
+      }
+    }
+  }
+  for (r=2; r<5; r++){
+    var count = 0 ;
+    for (c=1; c<r; c++){
+      var prevColor = $("td:eq("+(c-1+(r-c+1)*7)+")").attr('id');
+      var color = $("td:eq("+(c+(r-c)*7)+")").attr('id');
       if ((color === "red"||color == "blue") && color === prevColor) {
         count ++;
         console.log(count);
