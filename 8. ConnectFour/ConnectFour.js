@@ -67,7 +67,7 @@ function hcheck(){
   }
 }
 
-// Diagnol Check
+// Diagonal Check
 function dcheck(){
   // Botleft Triangel
   for (r=0; r<4; r++){
