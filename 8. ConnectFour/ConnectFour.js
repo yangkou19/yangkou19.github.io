@@ -69,7 +69,8 @@ function hcheck(){
 
 // Diagnol Check
 function dcheck(){
-  for (r=1; r<6; r++){
+  // Botleft Triangel
+  for (r=0; r<4; r++){
     var count = 0 ;
     for (c=1; c<7-r; c++){
       var prevColor = $("td:eq("+(c-1+(r+c-1)*7)+")").attr('id');
@@ -87,11 +88,50 @@ function dcheck(){
       }
     }
   }
-  for (r=2; r<5; r++){
+  // TopLeft Triangel
+  for (r=3; r<6; r++){
     var count = 0 ;
-    for (c=1; c<r; c++){
+    for (c=1; c<7-r; c++){
       var prevColor = $("td:eq("+(c-1+(r-c+1)*7)+")").attr('id');
       var color = $("td:eq("+(c+(r-c)*7)+")").attr('id');
+      if ((color === "red"||color == "blue") && color === prevColor) {
+        count ++;
+        console.log(count);
+        if (count === 3){
+          $('h3').text(map[color]+" has won! Refresh your browser to play again!")
+          break;
+        }
+      }
+      else {
+        count = 0;
+      }
+    }
+  }
+  // TopRight Triangel
+  for (c=1; c<4; c++){
+    var count = 0;
+    for (r=1; r<8-c; r++){
+      var prevColor = $("td:eq("+(c+r-1+(r-1)*7)+")").attr('id');
+      var color = $("td:eq("+(c+r+r*7)+")").attr('id');
+      if ((color === "red"||color == "blue") && color === prevColor) {
+        count ++;
+        console.log(count);
+        if (count === 3){
+          $('h3').text(map[color]+" has won! Refresh your browser to play again!")
+          break;
+        }
+      }
+      else {
+        count = 0;
+      }
+    }
+  }
+  // BotRight Triangel
+  for (c=1; c<4; c++){
+    var count = 0;
+    for (r=1; r<6; r++){
+      var prevColor = $("td:eq("+(c+r-1+(5-r+1)*7)+")").attr('id');
+      var color = $("td:eq("+(c+r+(5-r)*7)+")").attr('id');
       if ((color === "red"||color == "blue") && color === prevColor) {
         count ++;
         console.log(count);
